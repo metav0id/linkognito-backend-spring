@@ -1,0 +1,26 @@
+package de.awacademy.usermodul.entities;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+public class User {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private Integer alter;
+    private Boolean geschlecht;
+    private String ort;
+    private String password;
+    private String email;
+
+    @OneToMany
+    @JoinColumn()
+    private List<Kontakt> kontakt;
+}
