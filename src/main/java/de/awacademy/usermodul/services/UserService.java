@@ -4,7 +4,13 @@ import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.entities.User;
 import de.awacademy.usermodul.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -22,16 +28,34 @@ public class UserService {
      * @param userDto
      * @return User
      */
-    private User convertDtoE(UserDto userDto){
+    public User convertDtoE(UserDto userDto){
         User userEntiy = new User();
 
         userEntiy.setName(userDto.getName());
-        userEntiy.setAlter(userDto.getAge());
+        userEntiy.setAge(userDto.getAge());
         userEntiy.setGeschlecht(userDto.getGeschlecht());
         userEntiy.setEmail(userDto.getEmail());
         userEntiy.setPassword(userDto.getPassword());
 
         return userEntiy;
+
+    }
+
+    /**
+     * Map the User Entiy to an DTO to respons request
+     * @param user
+     * @return userDto
+     */
+    public UserDto convertEtoD(User user){
+        UserDto userDto = new UserDto();
+
+        userDto.setName(user.getName());
+        userDto.setAge(user.getAge());
+        userDto.setGeschlecht(user.getGeschlecht());
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
+
+        return userDto;
 
     }
 
@@ -43,4 +67,5 @@ public class UserService {
     public void addNewUser(UserDto userDto){
         userRepository.save(convertDtoE(userDto));
     }
+
 }

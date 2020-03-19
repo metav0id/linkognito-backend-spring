@@ -15,7 +15,7 @@ public class User {
     private Long id;
 
     private String name;
-    private Integer alter;
+    private Integer age;
     private Boolean geschlecht;
     private String ort;
     private String password;
