@@ -36,7 +36,7 @@ public class UserService {
         userEntiy.setGeschlecht(userDto.getGeschlecht());
         userEntiy.setEmail(userDto.getEmail());
         userEntiy.setPassword(userDto.getPassword());
-        userEntiy.setRegistierenDatum(userDto.getRegistierenDatum());
+        userEntiy.setRegisteredDate(userDto.getRegisteredDate());
 
         return userEntiy;
 
@@ -55,6 +55,7 @@ public class UserService {
         userDto.setGeschlecht(user.getGeschlecht());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
+        userDto.setRegisteredDate(user.getRegisteredDate());
 
         return userDto;
 
