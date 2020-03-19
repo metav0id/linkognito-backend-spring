@@ -1,7 +1,7 @@
 package de.awacademy.usermodul.dtos;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class UserDto {
@@ -10,9 +10,9 @@ public class UserDto {
     private String email;
     private Boolean geschlecht;
     private String password;
-    private LocalDateTime registierenDatum;
+    private String registeredDate;
 
     public UserDto() {
-        this.registierenDatum = LocalDateTime.now();
+        this.registeredDate = LocalDate.now().toString();
     }
 }
