@@ -34,6 +34,7 @@ public class UserService {
         userEntiy.setName(userDto.getName());
         userEntiy.setAge(userDto.getAge());
         userEntiy.setGeschlecht(userDto.getGeschlecht());
+        userEntiy.setOrt(userDto.getOrt());
         userEntiy.setEmail(userDto.getEmail());
         userEntiy.setPassword(userDto.getPassword());
         userEntiy.setRegisteredDate(userDto.getRegisteredDate());
@@ -53,6 +54,7 @@ public class UserService {
         userDto.setName(user.getName());
         userDto.setAge(user.getAge());
         userDto.setGeschlecht(user.getGeschlecht());
+        userDto.setOrt(user.getOrt());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setRegisteredDate(user.getRegisteredDate());
