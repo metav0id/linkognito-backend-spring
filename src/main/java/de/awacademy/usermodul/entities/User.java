@@ -3,6 +3,7 @@ package de.awacademy.usermodul.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class User {
 
     private String name;
     private Integer age;
-    private Boolean geschlecht;
+    private String geschlecht;
     private String ort;
     private String password;
     private String email;
