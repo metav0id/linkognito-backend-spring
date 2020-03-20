@@ -2,9 +2,8 @@ package de.awacademy.usermodul.controllers;
 
 import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.services.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class UserRegistierenController {
@@ -19,5 +18,10 @@ public class UserRegistierenController {
     @PostMapping("/registration")
     public void postMethode(@RequestBody UserDto userDto){
         userService.addNewUser(userDto);
+    }
+
+    @GetMapping("/user")
+    public UserDto findLoginUser(@RequestBody @RequestParam UserDto userDto){
+        return userService.findLoginUser(userDto);
     }
 }

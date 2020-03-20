@@ -71,4 +71,13 @@ public class UserService {
         userRepository.save(convertDtoE(userDto));
     }
 
+    /**
+     * Find an user from database with password and email
+     * @param userDto
+     * @return userDto
+     */
+    public UserDto findLoginUser(UserDto userDto) {
+        User user = userRepository.findLoginUser(userDto.getEmail(), userDto.getPassword());
+        return convertEtoD(user);
+    }
 }
