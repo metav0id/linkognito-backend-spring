@@ -6,7 +6,7 @@ import lombok.Data;
 public class ChatMessage {
     private long id;
     private long addressId;
-    private String timeStamp;
-    private String senderName;
+    private String time;
+    private String name;
     private String text;
 }

@@ -11,6 +11,7 @@ public class UserDto {
     private Boolean geschlecht;
     private String password;
     private LocalDateTime registierenDatum;
+    private Long userID;
 
     public UserDto() {
         this.registierenDatum = LocalDateTime.now();

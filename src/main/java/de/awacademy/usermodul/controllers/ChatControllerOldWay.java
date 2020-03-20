@@ -1,6 +1,7 @@
 package de.awacademy.usermodul.controllers;
 
 import de.awacademy.usermodul.dtos.ChatMessage;
+import de.awacademy.usermodul.dtos.UserDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,13 +19,37 @@ public class ChatControllerOldWay {
      * @return
      */
     //ToDO Differentiate by clientID
-    @GetMapping("/readAllMessages")
+   /* @GetMapping("/readAllMessages")
     public List<ChatMessage> readAllMessages(){
+
+        //TODO implement method to get all messages from Service API
+      *//*  RestTemplate restTemplate = new RestTemplate();
+        ChatMessageList response = restTemplate.getForObject(this.URL_ALL_MESSAGES_FROM_SERVICE_MODUL, ChatMessageList.class);
+        List<ChatMessage> listAllChatMessages = response.getChatMessages();*//*
+        ChatMessage newMessage = new ChatMessage();
+        newMessage.setText("Hallo aus der API");
+        this.messagesList.add(newMessage);
+        return this.messagesList;
+    }*/
+
+    @PostMapping("/readAllMessages")
+    public List<ChatMessage> readAllMessages(@RequestBody UserDto userDto){
+
+        //TEST
+        System.out.println("UserID:" + userDto.getUserID());
 
         //TODO implement method to get all messages from Service API
       /*  RestTemplate restTemplate = new RestTemplate();
         ChatMessageList response = restTemplate.getForObject(this.URL_ALL_MESSAGES_FROM_SERVICE_MODUL, ChatMessageList.class);
         List<ChatMessage> listAllChatMessages = response.getChatMessages();*/
+        ChatMessage newMessage = new ChatMessage();
+        if(userDto.getUserID() == 2){
+            newMessage.setText("Hallo User 2! :-)");
+        } else{
+            newMessage.setText("Ich kenne dich nicht! Wer bist du?");
+        }
+
+        this.messagesList.add(newMessage);
         return this.messagesList;
     }
 
