@@ -19,18 +19,6 @@ public class ChatControllerOldWay {
      * @return
      */
     //ToDO Differentiate by clientID
-   /* @GetMapping("/readAllMessages")
-    public List<ChatMessage> readAllMessages(){
-
-        //TODO implement method to get all messages from Service API
-      *//*  RestTemplate restTemplate = new RestTemplate();
-        ChatMessageList response = restTemplate.getForObject(this.URL_ALL_MESSAGES_FROM_SERVICE_MODUL, ChatMessageList.class);
-        List<ChatMessage> listAllChatMessages = response.getChatMessages();*//*
-        ChatMessage newMessage = new ChatMessage();
-        newMessage.setText("Hallo aus der API");
-        this.messagesList.add(newMessage);
-        return this.messagesList;
-    }*/
 
     @PostMapping("/readAllMessages")
     public List<ChatMessage> readAllMessages(@RequestBody UserDto userDto){
