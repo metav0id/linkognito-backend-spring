@@ -13,6 +13,10 @@ public class ChatControllerOldWay {
     private List<ChatMessage> messagesList = new ArrayList<>();
     private List<ChatMessage> newMessagesList = new ArrayList<>();
 
+    /**
+     * Returns a list of all messages relate to connection from Service-API
+     * @return
+     */
     //ToDO Differentiate by clientID
     @GetMapping("/readAllMessages")
     public List<ChatMessage> readAllMessages(){
@@ -47,4 +51,6 @@ public class ChatControllerOldWay {
         this.newMessagesList.clear();
         return returnValue;
     }
+
+    //TODO implement method to send a message to Service-API
 }
