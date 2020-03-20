@@ -1,22 +1,25 @@
 package de.awacademy.usermodul.controllers;
 
-import de.awacademy.usermodul.services.VerwaltungRstService;
-import org.springframework.web.bind.annotation.*;
+import de.awacademy.usermodul.dtos.UserDto;
+import de.awacademy.usermodul.services.VerwaltungRestService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 public class VerwaltungRestController {
 
-    private final VerwaltungRstService vwService;
+    private final VerwaltungRestService vwService;
 
-    public VerwaltungRestController(VerwaltungRstService vwService) {
+    public VerwaltungRestController(VerwaltungRestService vwService) {
         this.vwService = vwService;
     }
 
 
-    @GetMapping("/usersbetween{start}{end}")
-    public void readUsersInIntervall(@RequestBody @PathVariable LocalDateTime start, @PathVariable LocalDateTime end){
-        vwService.readUsersInIntervall(start, end);
+    @GetMapping("/users")
+    public List<UserDto> readUsersInIntervall(@RequestParam String from, @RequestParam String to){
+        return vwService.readUsersInIntervall(from, to);
     }
 }

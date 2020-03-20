@@ -5,14 +5,16 @@ import java.time.LocalDateTime;
 
 @Data
 public class UserDto {
+    private Long id;
     private String name;
     private Integer age;
     private String email;
-    private Boolean geschlecht;
+    private String ort;
+    private String geschlecht;
     private String password;
-    private LocalDateTime registierenDatum;
+    private LocalDateTime registeredDate;
 
     public UserDto() {
-        this.registierenDatum = LocalDateTime.now();
+        this.registeredDate = LocalDateTime.now();
     }
 }

@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface VerwaltungRestRepository extends JpaRepository<User,Long> {
-    @Query(value = "select u from User u where u.registierenDatum between 'start' AND 'end' ")
-    List<User> findByRegistierenDatumIntervall(LocalDateTime start, LocalDateTime end);
+    @Query(value = "select u from User u where u.registeredDate between :from AND :to ")
+    List<User> findByRegistierenDatumIntervall(
+            @Param("from") String from, @Param("to") String to);
 }
