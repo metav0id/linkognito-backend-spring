@@ -36,14 +36,14 @@ public class ChatControllerOldWay {
     public List<ChatMessage> readAllMessages(@RequestBody UserDto userDto){
 
         //TEST
-        System.out.println("UserID:" + userDto.getUserID());
+        System.out.println("UserID:" + userDto.getId());
 
         //TODO implement method to get all messages from Service API
       /*  RestTemplate restTemplate = new RestTemplate();
         ChatMessageList response = restTemplate.getForObject(this.URL_ALL_MESSAGES_FROM_SERVICE_MODUL, ChatMessageList.class);
         List<ChatMessage> listAllChatMessages = response.getChatMessages();*/
         ChatMessage newMessage = new ChatMessage();
-        if(userDto.getUserID() == 2){
+        if(userDto.getId() == 2){
             newMessage.setText("Hallo User 2! :-)");
         } else{
             newMessage.setText("Ich kenne dich nicht! Wer bist du?");
