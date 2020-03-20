@@ -4,14 +4,11 @@ import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.entities.User;
 import de.awacademy.usermodul.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 public class UserService {
@@ -32,12 +29,14 @@ public class UserService {
     public User convertDtoE(UserDto userDto){
         User userEntiy = new User();
 
+        userEntiy.setId(userDto.getId());
         userEntiy.setName(userDto.getName());
         userEntiy.setAge(userDto.getAge());
         userEntiy.setGeschlecht(userDto.getGeschlecht());
+        userEntiy.setOrt(userDto.getOrt());
         userEntiy.setEmail(userDto.getEmail());
         userEntiy.setPassword(userDto.getPassword());
-        userEntiy.setRegistierenDatum(userDto.getRegistierenDatum());
+        userEntiy.setRegisteredDate(userDto.getRegisteredDate().toString());
 
         return userEntiy;
 
@@ -51,11 +50,14 @@ public class UserService {
     public UserDto convertEtoD(User user){
         UserDto userDto = new UserDto();
 
+        userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setAge(user.getAge());
         userDto.setGeschlecht(user.getGeschlecht());
+        userDto.setOrt(user.getOrt());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
+        userDto.setRegisteredDate(LocalDateTime.parse(user.getRegisteredDate()));
 
         return userDto;
 
@@ -70,4 +72,13 @@ public class UserService {
         userRepository.save(convertDtoE(userDto));
     }
 
+    /**
+     * Find an user from database with password and email
+     * @param userDto
+     * @return userDto
+     */
+    public UserDto findLoginUser(UserDto userDto) {
+        User user = userRepository.findLoginUser(userDto.getEmail(), userDto.getPassword());
+        return convertEtoD(user);
+    }
 }

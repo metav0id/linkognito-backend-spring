@@ -16,11 +16,11 @@ public class User {
 
     private String name;
     private Integer age;
-    private Boolean geschlecht;
+    private String geschlecht;
     private String ort;
     private String password;
     private String email;
-    private LocalDateTime registierenDatum;
+    private String registeredDate;
 
     @OneToMany
     @JoinColumn()
