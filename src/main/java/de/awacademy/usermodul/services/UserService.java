@@ -4,6 +4,8 @@ import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.entities.User;
 import de.awacademy.usermodul.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import lombok.Data;
 
@@ -35,7 +37,9 @@ public class UserService {
         userEntiy.setGeschlecht(userDto.getGeschlecht());
         userEntiy.setOrt(userDto.getOrt());
         userEntiy.setEmail(userDto.getEmail());
-        userEntiy.setPassword(userDto.getPassword());
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        userEntiy.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntiy.setRegisteredDate(userDto.getRegisteredDate().toString());
 
         return userEntiy;
