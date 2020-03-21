@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -31,14 +32,12 @@ public class UserService {
     public User convertDtoE(UserDto userDto){
         User userEntiy = new User();
 
-        userEntiy.setId(userDto.getId());
         userEntiy.setName(userDto.getName());
         userEntiy.setAge(userDto.getAge());
         userEntiy.setGeschlecht(userDto.getGeschlecht());
         userEntiy.setOrt(userDto.getOrt());
         userEntiy.setEmail(userDto.getEmail());
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userEntiy.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntiy.setRegisteredDate(userDto.getRegisteredDate().toString());
 
@@ -77,12 +76,26 @@ public class UserService {
     }
 
     /**
-     * Find an user from database with password and email
+     * Check if an user exists in database with the given password and email
      * @param userDto
      * @return userDto
      */
-    public UserDto findLoginUser(UserDto userDto) {
-        User user = userRepository.findLoginUser(userDto.getEmail(), userDto.getPassword());
+    public UserDto checkLoginUser(UserDto userDto) {
+        User user = userRepository.checkLoginUser(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
         return convertEtoD(user);
+    }
+
+    /**
+     * Check if an user exists in database with the given email
+     * @param userDto
+     * @return userDto
+     */
+    public UserDto checkRegisterEmail(UserDto userDto) {
+        User user = userRepository.checkRegisterEmail(userDto.getEmail());
+        if(user == null){
+            return null;
+        } else {
+            return convertEtoD(user);
+        }
     }
 }

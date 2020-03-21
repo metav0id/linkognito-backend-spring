@@ -16,12 +16,20 @@ public class UserRegistierenController {
 
 
     @PostMapping("/registration")
-    public void postMethode(@RequestBody UserDto userDto){
-        userService.addNewUser(userDto);
+    public Long postMethode(@RequestBody UserDto userDto){
+        boolean userExisted = (userService.checkRegisterEmail(userDto) != null);
+        if(userExisted){
+            System.out.println("into existed case: " + userService.checkRegisterEmail(userDto));
+            return -1L;
+        } else {
+            System.out.println("into registable case: " + userDto);
+            userService.addNewUser(userDto);
+            return userService.checkRegisterEmail(userDto).getId();
+        }
     }
 
     @GetMapping("/user")
     public UserDto findLoginUser(@RequestBody @RequestParam UserDto userDto){
-        return userService.findLoginUser(userDto);
+        return userService.checkLoginUser(userDto);
     }
 }
