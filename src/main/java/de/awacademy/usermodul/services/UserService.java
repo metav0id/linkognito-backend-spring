@@ -4,8 +4,7 @@ import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.entities.User;
 import de.awacademy.usermodul.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.stereotype.Service;
 import lombok.Data;
 
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -38,7 +36,7 @@ public class UserService {
         userEntiy.setOrt(userDto.getOrt());
         userEntiy.setEmail(userDto.getEmail());
 
-        userEntiy.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userEntiy.setPassword(BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt()));
         userEntiy.setRegisteredDate(userDto.getRegisteredDate().toString());
 
         return userEntiy;
@@ -81,8 +79,12 @@ public class UserService {
      * @return userDto
      */
     public UserDto checkLoginUser(UserDto userDto) {
-        User user = userRepository.checkLoginUser(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
-        return convertEtoD(user);
+        User user = userRepository.checkRegisterEmail(userDto.getEmail());
+        if(user != null && BCrypt.checkpw(userDto.getPassword(), user.getPassword())){
+            return convertEtoD(user);
+        }
+
+       return null;
     }
 
     /**
@@ -92,10 +94,6 @@ public class UserService {
      */
     public UserDto checkRegisterEmail(UserDto userDto) {
         User user = userRepository.checkRegisterEmail(userDto.getEmail());
-        if(user == null){
-            return null;
-        } else {
-            return convertEtoD(user);
-        }
+        return user == null ? null : convertEtoD(user);
     }
 }

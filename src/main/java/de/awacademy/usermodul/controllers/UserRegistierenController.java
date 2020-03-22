@@ -14,9 +14,9 @@ public class UserRegistierenController {
         this.userService = userService;
     }
 
-
+    //    User Registrierung REST
     @PostMapping("/registration")
-    public Long postMethode(@RequestBody UserDto userDto){
+    public Long Registration(@RequestBody UserDto userDto){
         boolean userExisted = (userService.checkRegisterEmail(userDto) != null);
         if(userExisted){
             System.out.println("into existed case: " + userService.checkRegisterEmail(userDto));
@@ -28,8 +28,10 @@ public class UserRegistierenController {
         }
     }
 
-    @GetMapping("/user")
-    public UserDto findLoginUser(@RequestBody @RequestParam UserDto userDto){
+    //    User Login REST
+    @PostMapping("/login")
+    public UserDto LoginUser(@RequestBody UserDto userDto){
+        System.out.println("return " + userService.checkLoginUser(userDto) );
         return userService.checkLoginUser(userDto);
     }
 }
