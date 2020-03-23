@@ -16,15 +16,15 @@ public class UserRegistierenController {
 
     //    User Registrierung REST
     @PostMapping("/registration")
-    public Long Registration(@RequestBody UserDto userDto){
+    public UserDto Registration(@RequestBody UserDto userDto){
         boolean userExisted = (userService.checkRegisterEmail(userDto) != null);
         if(userExisted){
             System.out.println("into existed case: " + userService.checkRegisterEmail(userDto));
-            return -1L;
+            return null;
         } else {
             System.out.println("into registable case: " + userDto);
             userService.addNewUser(userDto);
-            return userService.checkRegisterEmail(userDto).getId();
+            return userService.checkRegisterEmail(userDto);
         }
     }
 
