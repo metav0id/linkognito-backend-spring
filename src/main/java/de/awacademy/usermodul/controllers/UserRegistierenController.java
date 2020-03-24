@@ -4,7 +4,7 @@ import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserRegistierenController {
 
