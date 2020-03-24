@@ -22,6 +22,10 @@ public class ContactRepositoryTest {
         // prepare
         Contact contact = new Contact();
         contact.setNickname("Harry der Fensterputzer");
+        contact.setQrcode("eroherherig");
+
+        contact.setActive(true);
+        contact.setConversation("blablabla");
 
         // run logic
         contactRepository.save(contact);
@@ -39,6 +43,10 @@ public class ContactRepositoryTest {
         // prepare
         Contact contact = new Contact();
         contact.setNickname("Harry der Fensterputzer");
+        contact.setQrcode("eroherherig");
+        contact.setId(23L);
+        contact.setActive(true);
+        contact.setConversation("blablabla");
         contactRepository.save(contact);
 
         // run logic
