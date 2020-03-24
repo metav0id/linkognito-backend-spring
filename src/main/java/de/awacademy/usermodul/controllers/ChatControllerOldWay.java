@@ -26,7 +26,7 @@ public class ChatControllerOldWay {
     HashMap<Long, List<ChatMessageDto>> tempNewChatMessages = new HashMap<>();
 
     /**
-     * Returns a list of all messages relate to connection from Service-API. Requests Dto with id of user
+     * Internal REST-API: Returns a list of all messages relate to connection from Service-API. Requests Dto with id of user
      * @return
      */
     @PostMapping("/readAllMessages")
@@ -43,7 +43,7 @@ public class ChatControllerOldWay {
 
 
     /**
-     * new Messages from Service-Modul will be sent to this API. Messages will be stored on list until they are called by API. Needs id, addressId, name, text, timestamp
+     * External REST-API: new Messages from Service-Modul will be sent to this API. Messages will be stored on list until they are called by API. Needs id, addressId, name, text, timestamp
      * @param chatMessage
      */
     @PostMapping("/service/pushmessages")
@@ -68,7 +68,8 @@ public class ChatControllerOldWay {
     }
 
     /**
-     * Serves all new messages and cleans afterwards the new messages list
+     * Internal REST-API: Serves all new messages and cleans afterwards the new messages list. Requires id of user.
+     * @param id as long of user
      * @return List of new Chat Messages
      */
     @PostMapping("/readNewMessages")
@@ -89,7 +90,7 @@ public class ChatControllerOldWay {
     }
 
     /**
-     * Send a new message to Service-Modul API. Needed: id, addressId, text in ChatMessageDto
+     * Internal REST-API: Send a new message to Service-Modul API. Needed: id, addressId, text in ChatMessageDto
      */
     @PostMapping("/sendMessage")
     private void sendNewMessage(@RequestBody ChatMessageDto newMessage){
