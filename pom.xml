@@ -56,9 +56,25 @@
             </exclusions>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.mariadb.jdbc</groupId>-->
+<!--            <artifactId>mariadb-java-client</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- JDBC Driver to Access PostgreSQL -->
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!-- JDBC Driver to Access PostgreSQL -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <dependency>
@@ -82,6 +98,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <appName>user-modul-menv</appName>
+                    <jdkVersion>11</jdkVersion>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -jar target/user-modul-0.0.1-SNAPSHOT.jar --server.port=$PORT</web>
+                    </processTypes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
