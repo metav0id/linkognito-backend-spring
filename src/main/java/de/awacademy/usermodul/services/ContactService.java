@@ -31,7 +31,7 @@ public class ContactService {
         contactEntity.setId(contactDto.getId());
         contactEntity.setAddressId(contactDto.getAddressId());
         contactEntity.setName(contactDto.getName());
-        contactEntity.setQrcode(contactDto.getQrCode());
+        contactEntity.setQrcode(contactDto.getQrcode());
         contactEntity.setActive(contactDto.getActive());
         contactEntity.setNickname(contactDto.getNickname());
 
@@ -49,7 +49,7 @@ public class ContactService {
         contactDto.setId(contactEntity.getId());
         contactDto.setAddressId(contactEntity.getAddressId());
         contactDto.setName(contactEntity.getName());
-        contactDto.setQrCode(contactEntity.getQrcode());
+        contactDto.setQrcode(contactEntity.getQrcode());
         contactDto.setActive(contactEntity.getActive());
         contactDto.setNickname(contactEntity.getNickname());
         return contactDto;
