@@ -81,7 +81,7 @@ public class ContactService {
      */
 
     public void updateContact(ContactDto contactDto) {
-
+        System.out.println(contactDto.getQrcode());
         contactRepository.save(convertDtoToEntity(contactDto));
     }
 

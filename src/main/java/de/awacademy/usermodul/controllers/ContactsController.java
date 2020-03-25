@@ -32,6 +32,7 @@ public class ContactsController {
 
     @PutMapping("/updateContact")
         public Boolean updateContact (@RequestBody ContactDto contactDto) {
+        System.out.println(contactDto.getQrcode());
         contactService.updateContact(contactDto);
         return true;
     }
