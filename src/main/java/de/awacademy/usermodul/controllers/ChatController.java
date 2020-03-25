@@ -19,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class ChatControllerOldWay {
+public class ChatController {
     private final String URL_SERVICE_SEND_MESSAGE = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/sendmessage";
     final String URL_ALL_MESSAGES_FROM_SERVICE_MODUL = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/getmessages";
     private List<ChatMessageDto> messagesList = new ArrayList<>();
