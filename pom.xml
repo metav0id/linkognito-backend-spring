@@ -104,7 +104,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <appName>user-modul-menv</appName>
+                    <appName>user-component</appName>
                     <jdkVersion>11</jdkVersion>
                     <processTypes>
                         <web>java $JAVA_OPTS -jar target/user-modul-0.0.1-SNAPSHOT.jar --server.port=$PORT</web>

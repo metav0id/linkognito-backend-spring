@@ -24,5 +24,5 @@ public class User {
 
     @OneToMany
     @JoinColumn()
-    private List<Contact> kontakt;
+    private List<Contact> contact;
 }

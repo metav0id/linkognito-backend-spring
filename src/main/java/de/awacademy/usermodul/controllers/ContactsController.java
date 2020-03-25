@@ -1,13 +1,9 @@
 package de.awacademy.usermodul.controllers;
 
-
 import de.awacademy.usermodul.dtos.ContactDto;
-import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.services.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -37,6 +33,12 @@ public class ContactsController {
     @PutMapping("/updateContact")
         public Boolean updateContact (@RequestBody ContactDto contactDto) {
         contactService.updateContact(contactDto);
+        return true;
+    }
+
+    @PostMapping("/addContact")
+    public Boolean addContact(@RequestBody ContactDto contactDto) {
+        contactService.addNewContact(contactDto);
         return true;
     }
 

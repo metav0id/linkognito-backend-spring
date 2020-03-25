@@ -3,6 +3,7 @@ package de.awacademy.usermodul.repositories;
 import de.awacademy.usermodul.entities.Contact;
 import de.awacademy.usermodul.entities.User;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,41 +17,35 @@ public class ContactRepositoryTest {
     @Autowired
     private ContactRepository contactRepository;
 
+    Contact contact= new Contact();
+
+    @Before
+    public void prepare(){
+        this.contact.setNickname("Harry der Fensterputzer");
+        this.contact.setQrcode("eroherherig");
+        this.contact.setActive(true);
+        this.contact.setName("blablabla");
+        this.contact.setAddressId(1243L);;
+    }
+
     @Test
-    public void AddUser() {
-
-        // prepare
-        Contact contact = new Contact();
-        contact.setNickname("Harry der Fensterputzer");
-        contact.setQrcode("eroherherig");
-
-        contact.setActive(true);
-        contact.setConversation("blablabla");
+    public void addUser() {
 
         // run logic
-        contactRepository.save(contact);
+        contactRepository.save(this.contact);
 
         // verify
-        Long id = contact.getId();
+        Long id = this.contact.getId();
         Contact contactFromDB = contactRepository.findById(id).get();
 
-        Assert.assertEquals(contact.getNickname(), contactFromDB.getNickname());
+        Assert.assertEquals(this.contact.getNickname(), contactFromDB.getNickname());
     }
 
     @Test
     public void deleteUser() {
 
-        // prepare
-        Contact contact = new Contact();
-        contact.setNickname("Harry der Fensterputzer");
-        contact.setQrcode("eroherherig");
-        contact.setId(23L);
-        contact.setActive(true);
-        contact.setConversation("blablabla");
-        contactRepository.save(contact);
-
         // run logic
-        Long id = contact.getId();
+        Long id = this.contact.getId();
         this.contactRepository.deleteById(id);
 
         // verify

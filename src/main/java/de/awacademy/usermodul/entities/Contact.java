@@ -14,10 +14,10 @@ public class Contact {
     @Id
     @GeneratedValue
     private Long id;
-
+    private Long addressId;
+    private String name;
     private String qrcode;
     private String nickname;
-    private String conversation;
     private Boolean active;
 
 }

@@ -26,12 +26,15 @@ public class ContactService {
      * @return Contact
      */
 
-    public Contact convertDtoToEntity (ContactDto contactDto) {
+    private Contact convertDtoToEntity (ContactDto contactDto) {
         Contact contactEntity = new Contact();
-        contactEntity.setActive(contactDto.getActive());
         contactEntity.setId(contactDto.getId());
-        contactEntity.setNickname(contactDto.getNickname());
+        contactEntity.setAddressId(contactDto.getAddressId());
+        contactEntity.setName(contactDto.getName());
         contactEntity.setQrcode(contactDto.getQrCode());
+        contactEntity.setActive(contactDto.getActive());
+        contactEntity.setNickname(contactDto.getNickname());
+
         return contactEntity;
     }
 
@@ -41,12 +44,14 @@ public class ContactService {
      * @return Contact
      */
 
-    public ContactDto convertEntityToDto (Contact contactEntity) {
+    private ContactDto convertEntityToDto (Contact contactEntity) {
         ContactDto contactDto = new ContactDto();
-        contactDto.setActive(contactEntity.getActive());
         contactDto.setId(contactEntity.getId());
-        contactDto.setNickname(contactEntity.getNickname());
+        contactDto.setAddressId(contactEntity.getAddressId());
+        contactDto.setName(contactEntity.getName());
         contactDto.setQrCode(contactEntity.getQrcode());
+        contactDto.setActive(contactEntity.getActive());
+        contactDto.setNickname(contactEntity.getNickname());
         return contactDto;
     }
 
@@ -99,8 +104,8 @@ public class ContactService {
      */
 
     public ContactDto readSingleContact(Long id) {
-        Optional<Contact> contactO = contactRepository.findById(id);
-        Contact contact = contactO.get();
+        Optional<Contact> contactOptional = contactRepository.findById(id);
+        Contact contact = contactOptional.get();
         return this.convertEntityToDto(contact);
     }
 }
