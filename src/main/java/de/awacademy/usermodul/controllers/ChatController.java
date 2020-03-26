@@ -5,6 +5,7 @@ import com.google.common.collect.Table;
 import de.awacademy.usermodul.dtos.ChatMessageDto;
 import de.awacademy.usermodul.dtos.ReadAllMessagesDto;
 import de.awacademy.usermodul.dtos.ReadNewMessagesDto;
+import de.awacademy.usermodul.dtos.SendMessageDto;
 import de.awacademy.usermodul.exceptions.NoEntryForIDException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -109,8 +110,11 @@ public class ChatController {
     private void sendNewMessage(@RequestBody ChatMessageDto newMessage){
         System.out.println("Message received from frontend...");
         System.out.println(newMessage.toString());
+        SendMessageDto newMessageDto = new SendMessageDto(newMessage.getId(), newMessage.getAddressId(), newMessage.getText());
+
         //TODO ich sende mehr informationen an die Schnittstelle als notwendig. Ergeben sich dadurch Seiteneffekte beim Service Modul?
-        ChatMessageDto response = this.restTemplate.postForObject(this.URL_SERVICE_SEND_MESSAGE,newMessage, ChatMessageDto.class);
+        ChatMessageDto response = this.restTemplate.postForObject(this.URL_SERVICE_SEND_MESSAGE,newMessageDto, ChatMessageDto.class);
+        /*ChatMessageDto response = this.restTemplate.postForObject(this.URL_SERVICE_SEND_MESSAGE,newMessage, ChatMessageDto.class);*/
         System.out.println("Status: "+response.isSuccess());
     }
 }
