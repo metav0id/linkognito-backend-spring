@@ -20,8 +20,10 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ChatController {
-    private final String URL_SERVICE_SEND_MESSAGE = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/sendmessage";
-    final String URL_ALL_MESSAGES_FROM_SERVICE_MODUL = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/getmessages";
+   /* private final String URL_SERVICE_SEND_MESSAGE = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/sendmessage";
+    final String URL_ALL_MESSAGES_FROM_SERVICE_MODUL = "https://31fcdb9c-6d24-4485-b1df-7ed6a9bd0fb5.mock.pstmn.io/user/getmessages";*/
+    private final String URL_SERVICE_SEND_MESSAGE = "https://linkogservices.herokuapp.com/user/sendmessage";
+    final String URL_ALL_MESSAGES_FROM_SERVICE_MODUL = "https://linkogservices.herokuapp.com/user/getmessages";
     private List<ChatMessageDto> messagesList = new ArrayList<>();
     private List<ChatMessageDto> newMessagesList = new ArrayList<>();
     private RestTemplate restTemplate = new RestTemplate();
@@ -107,7 +109,7 @@ public class ChatController {
     private void sendNewMessage(@RequestBody ChatMessageDto newMessage){
         System.out.println("Message received from frontend...");
         System.out.println(newMessage.toString());
-
+        //TODO ich sende mehr informationen an die Schnittstelle als notwendig. Ergeben sich dadurch Seiteneffekte beim Service Modul?
         ChatMessageDto response = this.restTemplate.postForObject(this.URL_SERVICE_SEND_MESSAGE,newMessage, ChatMessageDto.class);
         System.out.println("Status: "+response.isSuccess());
     }
