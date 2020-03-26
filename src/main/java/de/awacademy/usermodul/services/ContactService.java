@@ -1,12 +1,15 @@
 package de.awacademy.usermodul.services;
 
 import de.awacademy.usermodul.dtos.ContactDto;
+import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.entities.Contact;
 import de.awacademy.usermodul.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +74,7 @@ public class ContactService {
      */
 
     public void removeContact(Long id) {
+        System.out.println(id);
 
         contactRepository.deleteById(id);
     }
@@ -90,6 +94,8 @@ public class ContactService {
      * @return List of contactDtos
      */
 
+    // Todo: Kriegt User-Objekt übergeben und muss noch mod werden
+
     public List<ContactDto> readAll() {
         List<Contact> all = contactRepository.findAll();
         List<ContactDto> dtos = new ArrayList<>();
@@ -107,5 +113,15 @@ public class ContactService {
         Optional<Contact> contactOptional = contactRepository.findById(id);
         Contact contact = contactOptional.get();
         return this.convertEntityToDto(contact);
+    }
+
+    public List<ContactDto> readAllFromExternalServices(UserDto userDto){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://linkogservices.herokuapp.com/user/connections";
+        System.out.println(userDto.getId());
+        ContactDto [] response = restTemplate.postForObject(url, userDto, ContactDto[].class);
+        List<ContactDto> contactsList = Arrays.asList(response);
+        System.out.println(contactsList);
+        return contactsList;
     }
 }

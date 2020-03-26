@@ -1,6 +1,7 @@
 package de.awacademy.usermodul.controllers;
 
 import de.awacademy.usermodul.dtos.ContactDto;
+import de.awacademy.usermodul.dtos.UserDto;
 import de.awacademy.usermodul.services.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +18,14 @@ public class ContactsController {
         this.contactService = contactService;
     }
 
-    @GetMapping ("/readAllContacts")
-    @ResponseBody
-    public List<ContactDto> readAllContacts(ContactDto contactDto){
+    @PostMapping ("/readAllContacts")
+    public List<ContactDto> readAllContacts(@RequestBody UserDto userDto){
+        System.out.println(userDto.getId());
+        List <ContactDto> list = contactService.readAllFromExternalServices(userDto);
+        System.out.println(list);
+        return contactService.readAllFromExternalServices(userDto);
 
-        return contactService.readAll();
+        // return contactService.readAll();
     }
 
     @GetMapping("/readContact")
@@ -31,21 +35,21 @@ public class ContactsController {
     }
 
     @PutMapping("/updateContact")
-        public Boolean updateContact (@RequestBody ContactDto contactDto) {
+        public void updateContact (@RequestBody ContactDto contactDto) {
         contactService.updateContact(contactDto);
-        return true;
+
     }
 
     @PostMapping("/addContact")
-    public Boolean addContact(@RequestBody ContactDto contactDto) {
+    public void addContact(@RequestBody ContactDto contactDto) {
         contactService.addNewContact(contactDto);
-        return true;
+
     }
 
-    @DeleteMapping("/deleteContact")
-    public Boolean deleteContact (@RequestBody Long id) {
-        contactService.removeContact(id);
-        return true;
+    @PostMapping ("/deleteContact")
+    public void deleteContact (@RequestBody ContactDto contactDto) {
+        System.out.println(contactDto.getId());
+        contactService.removeContact(contactDto.getId());
     }
 
 
